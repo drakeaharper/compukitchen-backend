@@ -13,7 +13,7 @@ export function setEnviroment(app) {
 
 function setDevEnv(app) {
     process.env.NODE_ENV = 'development'
-    process.env.DB_URL = 'mongodb://127.0.0.1:27017/compukitchen-db'
+    process.env.DB_URL = 'mongodb+srv://dharper:ggxUODk17jR4Y92r@cluster0.kien1.mongodb.net/compukitch-dev-db?retryWrites=true&w=majority'
     process.env.TOKEN_SECRET = 'my-development-secret'
     app.use(bodyParser.json())
     app.use(morgan('dev'))
@@ -21,7 +21,7 @@ function setDevEnv(app) {
 }
 
 function setProdEnv(app) {
-    process.env.DB_URL = 'mongodb://127.0.0.1:27017/compukitchen-db'
+    process.env.DB_URL = 'mongodb+srv://dharper:ggxUODk17jR4Y92r@cluster0.kien1.mongodb.net/compukitch-prod-db?retryWrites=true&w=majority'
     process.env.TOKEN_SECRET = 'my-production-secret'
     app.use(bodyParser.json())
     app.use(express.static(__dirname + '/../dist'))
