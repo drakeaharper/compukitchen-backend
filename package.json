@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "set NODE_ENV=production && babel dev-server --out-dir prod-server --watch && vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dev": "concurrently \"set NODE_ENV=development\" \"babel dev-server --out-dir prod-server --watch\" \"nodemon prod-server/index.js\" \"npm run serve\"",
+    "dev": "concurrently \"set NODE_ENV=development\" \"babel dev-server --out-dir prod-server --watch\" \"nodemon prod-server/index.js\"",
     "temp": "babel dev-server --out-dir prod-server"
   },
   "dependencies": {
