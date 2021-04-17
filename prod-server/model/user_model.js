@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
-var _bcryptNodejs = _interopRequireDefault(require("bcrypt-nodejs"));
+var _bcryptjs = _interopRequireDefault(require("bcryptjs"));
 
 var _stringUtil = require("../utilities/string-util");
 
@@ -33,7 +33,7 @@ userSchema.virtual('fullName').get(function () {
 });
 
 userSchema.statics.passwordMatches = function (password, hash) {
-  return _bcryptNodejs.default.compareSync(password, hash);
+  return _bcryptjs.default.hashSync(password, hash);
 };
 
 userSchema.pre('save', function (next) {
@@ -41,7 +41,10 @@ userSchema.pre('save', function (next) {
   this.first = this.first.toLowerCase();
   this.last = this.last.toLowerCase();
   const unsafePassword = this.password;
-  this.password = _bcryptNodejs.default.hashSync(unsafePassword);
+
+  const salt = _bcryptjs.default.genSaltSync(10);
+
+  this.password = _bcryptjs.default.hashSync(unsafePassword, salt);
   next();
 });
 

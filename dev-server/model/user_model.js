@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import bcrypt from 'bcrypt-nodejs'
+import bcrypt from 'bcryptjs'
 import { StringUtil } from '../utilities/string-util'
 
 const userSchema = new mongoose.Schema({
@@ -16,14 +16,15 @@ userSchema.virtual('fullName').get(function() {
     return `${first} ${last}`
 })
 userSchema.statics.passwordMatches = function (password, hash) {
-    return bcrypt.compareSync(password, hash)
+    return bcrypt.hashSync(password, hash)
 }
 userSchema.pre('save', function(next) {
     this.username = this.username.toLowerCase()
     this.first = this.first.toLowerCase()
     this.last = this.last.toLowerCase()
     const unsafePassword = this.password
-    this.password = bcrypt.hashSync(unsafePassword)
+    const salt = bcrypt.genSaltSync(10)
+    this.password = bcrypt.hashSync(unsafePassword, salt)
     next()
 })
 

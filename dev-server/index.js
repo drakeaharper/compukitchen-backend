@@ -4,17 +4,16 @@ import { setEnviroment } from './config/env.js'
 import { connectToDB } from './config/db'
 
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 8080
 
 setEnviroment(app)
 connectToDB()
 registerRoutes(app)
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.json({ message: `Welcome to the compukitchen api. Running in ${process.env.NODE_ENV} mode.` })
 })
 
-app.listen(port, () => {
-  console.log(`Trivia Game listening at http://localhost:${port}`)
+app.listen(PORT, () => {
+  console.log(`CompuKitchen listening at http://localhost:${PORT}`)
 })
-

@@ -11,13 +11,15 @@ var _db = require("./config/db");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const app = (0, _express.default)();
-const port = 3000;
+const PORT = process.env.PORT || 8080;
 (0, _env.setEnviroment)(app);
 (0, _db.connectToDB)();
 (0, _routes.registerRoutes)(app);
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.json({
+    message: `Welcome to the compukitchen api. Running in ${process.env.NODE_ENV} mode.`
+  });
 });
-app.listen(port, () => {
-  console.log(`Trivia Game listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`CompuKitchen listening at http://localhost:${PORT}`);
 });

@@ -16,13 +16,15 @@ function setDevEnv(app) {
     process.env.DB_URL = 'mongodb+srv://dharper:ggxUODk17jR4Y92r@cluster0.kien1.mongodb.net/compukitch-dev-db?retryWrites=true&w=majority'
     process.env.TOKEN_SECRET = 'my-development-secret'
     app.use(bodyParser.json())
+    app.use(bodyParser.urlencoded({ extended: true }))
     app.use(morgan('dev'))
     app.use(cors())
 }
 
 function setProdEnv(app) {
+    console.log("##### running production #####")
     process.env.DB_URL = 'mongodb+srv://dharper:ggxUODk17jR4Y92r@cluster0.kien1.mongodb.net/compukitch-prod-db?retryWrites=true&w=majority'
     process.env.TOKEN_SECRET = 'my-production-secret'
     app.use(bodyParser.json())
-    app.use(express.static(__dirname + '/../dist'))
+    app.use(bodyParser.urlencoded({ extended: true }))
 }
