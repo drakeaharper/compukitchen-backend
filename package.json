@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "set NODE_ENV=production&&node prod-server/index.js",
+    "start": "NODE_ENV=production node prod-server/index.js",
     "start-maybe": "set NODE_ENV=production&& node dev-server/index.js",
     "dev": "concurrently \"set NODE_ENV=development\" \"babel dev-server --out-dir prod-server --watch\" \"nodemon prod-server/index.js\"",
     "temp": "babel dev-server --out-dir prod-server"
