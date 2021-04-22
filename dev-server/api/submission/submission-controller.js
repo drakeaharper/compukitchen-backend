@@ -61,3 +61,13 @@ export function process(req, res) {
         return res.status(200).json()
     })
 }
+
+export function pastSubmissions(req, res) {
+    Submission.find({ workflow_status: "Processed" }, (error, found_submissions) => {
+        if (error) {
+            return res.status(500).json()
+        }
+
+        return res.status(200).json({submissions: found_submissions})
+    })
+}

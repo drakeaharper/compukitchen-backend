@@ -7,6 +7,7 @@ exports.userSubmit = userSubmit;
 exports.userSubmissions = userSubmissions;
 exports.submissionsToProcess = submissionsToProcess;
 exports.process = process;
+exports.pastSubmissions = pastSubmissions;
 
 var _submission_model = _interopRequireDefault(require("../../model/submission_model"));
 
@@ -88,5 +89,19 @@ function process(req, res) {
     }
 
     return res.status(200).json();
+  });
+}
+
+function pastSubmissions(req, res) {
+  _submission_model.default.find({
+    workflow_status: "Processed"
+  }, (error, found_submissions) => {
+    if (error) {
+      return res.status(500).json();
+    }
+
+    return res.status(200).json({
+      submissions: found_submissions
+    });
   });
 }

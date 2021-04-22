@@ -7,5 +7,6 @@ router.post('/user_submit', controller.userSubmit)
 router.get('/user_submissions/:id', controller.userSubmissions)
 router.get('/submissions_to_process', controller.submissionsToProcess)
 router.put('/process/:id', controller.process)
+router.get('/past_submissions', controller.pastSubmissions)
 
 export default router
