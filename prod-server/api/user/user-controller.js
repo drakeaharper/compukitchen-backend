@@ -22,7 +22,7 @@ function index(req, res) {
     }
 
     return res.status(200).json({
-      user: user
+      users: user
     });
   });
 }
@@ -57,8 +57,18 @@ function update(req, res) {
       return res.status(404).json();
     }
 
-    return res.status(200).json({
-      user: user
+    user.role = req.body.role;
+
+    _user_model.default.updateOne({
+      _id: req.params.id
+    }, user, (error, updated_user) => {
+      if (error) {
+        return res.status(500).json();
+      }
+
+      if (!updated_user) {
+        return res.status(404).json();
+      }
     });
   });
 }

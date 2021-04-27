@@ -8,7 +8,7 @@ export function index(req, res) {
         if (!user) {
             return res.status(404).json()
         }
-        return res.status(200).json({user: user})
+        return res.status(200).json({users: user})
     })
 }
 
@@ -34,6 +34,15 @@ export function update(req, res) {
             return res.status(404).json()
         }
 
-        return res.status(200).json({user: user})
+        user.role = req.body.role
+
+        User.updateOne({_id: req.params.id }, user, (error, updated_user) => {
+            if (error) {
+                return res.status(500).json()
+            }
+            if (!updated_user) {
+                return res.status(404).json()
+            }
+        })
     })
 }
