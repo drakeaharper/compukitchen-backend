@@ -1,9 +1,10 @@
 import express from 'express'
 const router = express.Router()
 import * as controller from './user-controller'
+import * as auth from '../../services/auth-service';
 
-router.get('/user', controller.index)
-router.get('/user/:id', controller.show)
-router.put('/user/:id', controller.update)
+router.get('/user', auth.requireLogin, controller.index)
+router.get('/user/:id', auth.requireLogin, controller.show)
+router.put('/user/:id', auth.requireLogin, controller.update)
 
 export default router
